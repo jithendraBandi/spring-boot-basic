@@ -1,6 +1,7 @@
 package com.poc.springSecurity.controller;
 
 import com.poc.springSecurity.config.securityImpl.UserDetailsImpl;
+import com.poc.springSecurity.dto.request.LoginRequest;
 import com.poc.springSecurity.dto.request.UserRequest;
 import com.poc.springSecurity.entity.Users;
 import com.poc.springSecurity.repository.UsersRepository;
@@ -21,7 +22,7 @@ public class UsersController {
     @Autowired
     private UsersService usersService;
 
-    @PostMapping("")
+    @PostMapping("/add-user")
     public ResponseEntity<String> addUser(@RequestBody UserRequest request) {
         usersService.addUser(request);
         return ResponseEntity.ok("User Added Successfully.");
@@ -32,6 +33,12 @@ public class UsersController {
         //        User user = (User) authentication.getPrincipal();  // Password will be null if User type is used.
         UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
         Map<String, String> response = usersService.getPrincipleUserDetails(user);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> authenticateUser(@RequestBody LoginRequest request) {
+        String response = usersService.authenticateUser(request);
         return ResponseEntity.ok(response);
     }
 
