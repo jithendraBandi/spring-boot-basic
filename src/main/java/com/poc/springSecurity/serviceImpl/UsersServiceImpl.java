@@ -14,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -52,10 +53,10 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public String authenticateUser(LoginRequest request) {
+    public String authenticateUser(LoginRequest request) throws NoSuchAlgorithmException {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
         if (!authentication.isAuthenticated()) throw new RuntimeException("Invalid username or password");
-        return jwtService.generateToken();
+        return jwtService.generateToken(request.getUsername());
     }
 }

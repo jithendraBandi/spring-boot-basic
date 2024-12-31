@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -37,7 +38,7 @@ public class UsersController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> authenticateUser(@RequestBody LoginRequest request) {
+    public ResponseEntity<String> authenticateUser(@RequestBody LoginRequest request) throws NoSuchAlgorithmException {
         String response = usersService.authenticateUser(request);
         return ResponseEntity.ok(response);
     }
