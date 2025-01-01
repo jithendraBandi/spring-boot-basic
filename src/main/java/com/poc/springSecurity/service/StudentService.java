@@ -8,5 +8,5 @@ import java.util.List;
 public interface StudentService {
     List<StudentResponse> getStudents();
 
-    void addStudent(StudentRequest request);
+    StudentResponse addStudent(StudentRequest request);
 }

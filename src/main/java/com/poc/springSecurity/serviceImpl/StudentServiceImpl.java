@@ -24,8 +24,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void addStudent(StudentRequest request) {
+    public StudentResponse addStudent(StudentRequest request) {
         Student student = CommonMapper.mapper.convertStudentRequestToEntity(request);
         studentRepository.save(student);
+        return CommonMapper.mapper.convertStudentEntityToRes(student);
     }
 }

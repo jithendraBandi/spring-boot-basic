@@ -18,6 +18,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import static com.poc.springSecurity.utils.Constants.SECRET_KEY;
+
 @Service
 public class JwtServiceImpl implements JwtService {
     //    private String secretKey;
@@ -35,8 +37,6 @@ public class JwtServiceImpl implements JwtService {
     }
 
     private SecretKey getKey() throws NoSuchAlgorithmException {
-        String SECRET_KEY = "sfLHUjI57U6ikjh87KUG7iuggikUYIH7/l3,;l3,4;/l5m;nm3.5;l345m";
-
 //        KeyGenerator keyGenerator = KeyGenerator.getInstance("HmacSHA256");
 //        SecretKey sk = keyGenerator.generateKey();
 

@@ -3,6 +3,7 @@ package com.poc.springSecurity.serviceImpl;
 import com.poc.springSecurity.config.securityImpl.UserDetailsImpl;
 import com.poc.springSecurity.dto.request.LoginRequest;
 import com.poc.springSecurity.dto.request.UserRequest;
+import com.poc.springSecurity.dto.response.UserResponse;
 import com.poc.springSecurity.entity.Users;
 import com.poc.springSecurity.mapper.CommonMapper;
 import com.poc.springSecurity.repository.UsersRepository;
@@ -34,9 +35,10 @@ public class UsersServiceImpl implements UsersService {
 
 
     @Override
-    public void addUser(UserRequest request) {
+    public UserResponse addUser(UserRequest request) {
         Users user = CommonMapper.mapper.convertUsersRequestToEntity(request);
         usersRepository.save(user);
+        return null;
     }
 
     @Override
