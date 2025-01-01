@@ -3,8 +3,6 @@ package com.poc.springSecurity.controller;
 import com.poc.springSecurity.config.securityImpl.UserDetailsImpl;
 import com.poc.springSecurity.dto.request.LoginRequest;
 import com.poc.springSecurity.dto.request.UserRequest;
-import com.poc.springSecurity.entity.Users;
-import com.poc.springSecurity.repository.UsersRepository;
 import com.poc.springSecurity.service.UsersService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RestController
@@ -46,6 +43,7 @@ public class UsersController {
     @GetMapping("/csrf-token")
     public ResponseEntity<CsrfToken> getCsrfToken(HttpServletRequest request) {
         // token visible in cookies in post man
+        // as we use sessionManagement STATELESS in securityConfig the sessionId will be changed automatically for every request
         return ResponseEntity.ok((CsrfToken) request.getAttribute("_csrf"));
     }
 }

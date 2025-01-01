@@ -4,6 +4,7 @@ import com.poc.springSecurity.config.securityImpl.UserDetailsImpl;
 import com.poc.springSecurity.dto.request.LoginRequest;
 import com.poc.springSecurity.dto.request.UserRequest;
 import com.poc.springSecurity.entity.Users;
+import com.poc.springSecurity.mapper.CommonMapper;
 import com.poc.springSecurity.repository.UsersRepository;
 import com.poc.springSecurity.service.JwtService;
 import com.poc.springSecurity.service.UsersService;
@@ -34,12 +35,7 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public void addUser(UserRequest request) {
-        Users user = new Users();
-        user.setUsername(request.getUsername());
-        user.setPassword(request.getPassword());
-        user.setEncodedPassword(encoder.encode(request.getPassword()));
-        user.setRoles(request.getRoles());
-        user.setBaseId(request.getBaseId());
+        Users user = CommonMapper.mapper.convertUsersRequestToEntity(request);
         usersRepository.save(user);
     }
 

@@ -1,45 +1,13 @@
 package com.poc.springSecurity.dto.request;
 
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 public class UserRequest {
     private String username;
     private String password;
     private List<String> roles;
     private String baseId;
-
-    public UserRequest() {}
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public List<String> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
-    }
-
-    public String getBaseId() {
-        return baseId;
-    }
-
-    public void setBaseId(String baseId) {
-        this.baseId = baseId;
-    }
 }
