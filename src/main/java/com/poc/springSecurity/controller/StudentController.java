@@ -23,20 +23,14 @@ public class StudentController {
 
 //        return ResponseEntity.ok("Greeting Hello " + httpServletRequest.getSession().getId());
         List<StudentResponse> students = studentService.getStudents();
-        ApiResponse apiResponse = ApiResponse.builder()
-                .data(students)
-                .message("Students fetched Successfully")
-                .build();
+        ApiResponse apiResponse = new ApiResponse(students, "Students fetched successfully.");
         return ResponseEntity.ok(apiResponse);
     }
 
     @PostMapping("")
     public ResponseEntity<ApiResponse> addStudent(@RequestBody StudentRequest request) {
         StudentResponse studentResponse = studentService.addStudent(request);
-        ApiResponse apiResponse = ApiResponse.builder()
-                .data(studentResponse)
-                .message("Student added successfully.")
-                .build();
+        ApiResponse apiResponse = new ApiResponse(studentResponse, "Student added successfully.");
         return ResponseEntity.status(HttpStatus.CREATED).body(apiResponse);
     }
 }

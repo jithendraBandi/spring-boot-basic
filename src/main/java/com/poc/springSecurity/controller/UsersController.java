@@ -7,6 +7,7 @@ import com.poc.springSecurity.dto.response.ApiResponse;
 import com.poc.springSecurity.dto.response.UserResponse;
 import com.poc.springSecurity.service.UsersService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +28,7 @@ public class UsersController {
     @PostMapping("/add-user")
     public ResponseEntity<ApiResponse> addUser(@RequestBody UserRequest request) {
         UserResponse userResponse = usersService.addUser(request);
-        ApiResponse apiResponse = ApiResponse.builder()
-                .data(userResponse)
-                .message("User added successfully.")
-                .build();
+        ApiResponse apiResponse = new ApiResponse(userResponse, "User added successfully.");
         return ResponseEntity.status(HttpStatus.CREATED).body(apiResponse);
     }
 
@@ -39,20 +37,14 @@ public class UsersController {
         //        User user = (User) authentication.getPrincipal();  // Password will be null if User type is used.
         UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
         Map<String, String> response = usersService.getPrincipleUserDetails(user);
-        ApiResponse apiResponse = ApiResponse.builder()
-                .data(response)
-                .message("User added successfully.")
-                .build();
+        ApiResponse apiResponse = new ApiResponse(response, "User fetched successfully.");
         return ResponseEntity.ok(apiResponse);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ApiResponse> authenticateUser(@RequestBody LoginRequest request) throws NoSuchAlgorithmException {
+    public ResponseEntity<ApiResponse> authenticateUser(@Valid @RequestBody LoginRequest request) throws NoSuchAlgorithmException {
         String jwtToken = usersService.authenticateUser(request);
-        ApiResponse apiResponse = ApiResponse.builder()
-                .data(jwtToken)
-                .message("User added successfully.")
-                .build();
+        ApiResponse apiResponse = new ApiResponse(jwtToken, "User logged in successfully.");
         return ResponseEntity.ok(apiResponse);
     }
 
@@ -61,10 +53,7 @@ public class UsersController {
         // token visible in cookies in post man
         // as we use sessionManagement STATELESS in securityConfig the sessionId will be changed automatically for every request
         CsrfToken csrfToken = (CsrfToken) request.getAttribute("_csrf");
-        ApiResponse apiResponse = ApiResponse.builder()
-                .data(csrfToken)
-                .message("User added successfully.")
-                .build();
+        ApiResponse apiResponse = new ApiResponse(csrfToken, "Csrf token fetched successfully.");
         return ResponseEntity.ok(apiResponse);
     }
 }

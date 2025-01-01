@@ -1,5 +1,6 @@
 package com.poc.springSecurity.dto.response;
 
+import jakarta.persistence.PrePersist;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,4 +21,18 @@ public class ApiResponse {
     private Object data;
 
     private String message;
+
+    public ApiResponse(String message) {
+        this.message = message;
+    }
+
+    public ApiResponse(Object data, String message) {
+        this.data = data;
+        this.message = message;
+    }
+
+    @PrePersist
+    public void setDefaults() {
+        this.responseTimestamp = new Date();
+    }
 }
