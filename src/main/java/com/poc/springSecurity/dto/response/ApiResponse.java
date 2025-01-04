@@ -10,12 +10,10 @@ import java.time.Instant;
 import java.util.Date;
 
 @Data
-@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class ApiResponse {
 
-    @Builder.Default
     private Date responseTimestamp = new Date();
 
     private Object data;
@@ -31,8 +29,4 @@ public class ApiResponse {
         this.message = message;
     }
 
-    @PrePersist
-    public void setDefaults() {
-        this.responseTimestamp = new Date();
-    }
 }
