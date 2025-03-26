@@ -37,6 +37,7 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public UserResponse addUser(UserRequest request) {
         Users user = CommonMapper.mapper.convertUsersRequestToEntity(request);
+        user.setEncodedPassword(encoder.encode(request.getPassword()));
         usersRepository.save(user);
         return null;
     }

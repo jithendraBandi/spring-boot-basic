@@ -26,6 +26,10 @@ public class StudentController {
         ApiResponse apiResponse = new ApiResponse(students, "Students fetched successfully.");
         return ResponseEntity.ok(apiResponse);
     }
+    @GetMapping("/auth")
+    public ResponseEntity<String> authGetStudents() {
+        return ResponseEntity.ok("Authentication successful and viewing auth content");
+    }
 
     @PostMapping("")
     public ResponseEntity<ApiResponse> addStudent(@RequestBody StudentRequest request) {

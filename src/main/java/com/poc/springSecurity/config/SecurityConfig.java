@@ -38,7 +38,7 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(
-//                                "/api/users/add-user",   // should be authenticated for adding user by higher role only
+                                "/users/add-user",   // should be authenticated for adding user by higher role only
                                 "/users/login",
                                     "/students"
 //                                "/swagger-resources",
