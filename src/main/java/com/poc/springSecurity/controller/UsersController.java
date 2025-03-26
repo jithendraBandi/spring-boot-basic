@@ -20,11 +20,12 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UsersController {
     @Autowired
     private UsersService usersService;
 
+    // It should be available only for authenticated user with SUPER_ADMIN or HIGH_ADMINISTRATOR role only
     @PostMapping("/add-user")
     public ResponseEntity<ApiResponse> addUser(@RequestBody UserRequest request) {
         UserResponse userResponse = usersService.addUser(request);
