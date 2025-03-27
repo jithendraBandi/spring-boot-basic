@@ -3,6 +3,11 @@ server:
   servlet:
     context-path: /basic
 
+aws:
+  s3:
+    bucket: spring-boot-basic
+    region: ap-south-1
+
 spring:
   application:
     name: spring-boot-basic

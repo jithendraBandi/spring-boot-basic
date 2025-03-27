@@ -1,6 +1,6 @@
 package com.poc.springSecurity.controller;
 
-import com.poc.springSecurity.config.securityImpl.UserDetailsImpl;
+import com.poc.springSecurity.config.security.UserDetailsImpl;
 import com.poc.springSecurity.dto.request.LoginRequest;
 import com.poc.springSecurity.dto.request.UserRequest;
 import com.poc.springSecurity.dto.response.ApiResponse;

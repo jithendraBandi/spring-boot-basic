@@ -1,4 +1,4 @@
-package com.poc.springSecurity.config.securityImpl;
+package com.poc.springSecurity.config.security;
 
 import com.poc.springSecurity.entity.Users;
 import com.poc.springSecurity.repository.UsersRepository;
