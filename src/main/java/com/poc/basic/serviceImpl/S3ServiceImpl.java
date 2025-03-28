@@ -53,7 +53,7 @@ public class S3ServiceImpl implements S3Service {
     }
 
     @Override
-    public String uploadFile(MultipartFile file) {
+    public String uploadFile(MultipartFile file, String fileName) {
         MultipartFile compressedFile = file;
         if (file.getSize() > MAX_SIZE_2MB) {
             try {
@@ -72,7 +72,7 @@ public class S3ServiceImpl implements S3Service {
         }
         String originalFileName = Objects.requireNonNullElse(compressedFile.getOriginalFilename(), "");
         String extension = originalFileName.substring(originalFileName.lastIndexOf('.') + 1);
-        String key = "testing/index".replace(" ", "") + "." + extension;  // make sure no spaces
+        String key = fileName + "." + extension;
 
         PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                 .bucket(bucketName)
@@ -133,7 +133,7 @@ public class S3ServiceImpl implements S3Service {
         BufferedImage image = ImageIO.read(file.getInputStream());
 
         // Initial image quality and size check
-        float quality = 1.0f; // Maximum quality (1.0 means no compression)
+        float quality = 0.99f; // Maximum quality (1.0 means no compression)
         int maxFileSize = 2 * 1024 * 1024; // 2MB in bytes
 
         // Loop to compress the image and check the file size
@@ -168,9 +168,9 @@ public class S3ServiceImpl implements S3Service {
             } catch (IOException e) {
                 throw new IOException("Error during image compression: " + e.getMessage(), e);
             }
-            quality -= 0.1f; // Reduce quality by 10% after each iteration
+            quality -= 0.05f; // Reduce quality by 10% after each iteration
 
-        } while (quality > 0.1f); // Stop if quality is too low (e.g., below 0.1)
+        } while (quality > 0.01f); // Stop if quality is too low (e.g., below 0.1)
 
         // If we reach here, we couldn't compress the image enough to fit within 2MB
         throw new IOException("Unable to compress image to fit within 2MB.");

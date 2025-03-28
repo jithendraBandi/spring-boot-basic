@@ -31,8 +31,8 @@ public class S3Controller {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<ApiResponse> uploadFile(@RequestParam MultipartFile file) {
-        String url = s3Service.uploadFile(file); // pass url back if required
+    public ResponseEntity<ApiResponse> uploadFile(@RequestParam MultipartFile file, @RequestParam String fileName) {
+        String url = s3Service.uploadFile(file,fileName); // pass url back if required
         ApiResponse response = new ApiResponse("File uploaded successfully");
         return ResponseEntity.ok(response);
     }
